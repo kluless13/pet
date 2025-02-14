@@ -1,0 +1,35 @@
+/* For information on how to create your own theme, please see:
+http://ionicframework.com/docs/theming/ */
+
+/* Core Variables for Ionic App */
+:root {
+  /* Primary Pastel - Soft Blue */
+  --ion-color-primary: #A8DADC;
+  --ion-color-primary-rgb: 168, 218, 220;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-contrast-rgb: 0, 0, 0;
+  --ion-color-primary-shade: #94B6B8;
+  --ion-color-primary-tint: #B9E1E2;
+
+  /* Secondary Pastel - Soft Yellow */
+  --ion-color-secondary: #F6E2B3;
+  --ion-color-secondary-rgb: 246, 226, 179;
+  --ion-color-secondary-contrast: #000000;
+  --ion-color-secondary-contrast-rgb: 0, 0, 0;
+  --ion-color-secondary-shade: #D9C6A1;
+  --ion-color-secondary-tint: #F7E7BF;
+
+  /* Tertiary Pastel - Light Neutral */
+  --ion-color-tertiary: #F1FAEE;
+  --ion-color-tertiary-rgb: 241, 250, 238;
+  --ion-color-tertiary-contrast: #000000;
+  --ion-color-tertiary-contrast-rgb: 0, 0, 0;
+  --ion-color-tertiary-shade: #D9E0D6;
+  --ion-color-tertiary-tint: #F3FBF1;
+
+  /* Success & Danger (Pastel versions) */
+  --ion-color-success: #A7D7C5;
+  --ion-color-danger: #FFB4A2;
+}
+
+/* Additional global styling can be added below */
