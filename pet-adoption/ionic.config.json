@@ -1,7 +1,0 @@
-{
-  "name": "pet-adoption",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "react-vite"
-}
