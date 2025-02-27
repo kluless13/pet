@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-// @ts-ignore: Firebase auth module types might need additional configuration
-import { getAuth, onAuthStateChanged, User } from 'firebase/auth'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { firebaseApp } from '@/lib/firebase'
+import type { FirebaseApp } from 'firebase/app'
 import AdopterNav from '@/components/adopter/AdopterNav'
 
 export default function AdopterLayout({ children }: { children: React.ReactNode }) {
@@ -12,15 +12,20 @@ export default function AdopterLayout({ children }: { children: React.ReactNode 
   const router = useRouter();
 
   useEffect(() => {
-    const auth = getAuth(firebaseApp);
-    const unsubscribe = onAuthStateChanged(auth, (user: User | null) => {
+    const app = firebaseApp as FirebaseApp | undefined;
+    if (!app) return;
+    
+    const auth = getAuth(app);
+    const unsubscribe = onAuthStateChanged(auth, () => {
       setIsLoading(false);
     });
     return unsubscribe;
   }, [router]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="min-h-screen bg-gray-950 flex items-center justify-center">
+      <div className="text-white">Loading...</div>
+    </div>;
   }
 
   return (

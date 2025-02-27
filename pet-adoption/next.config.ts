@@ -1,15 +1,11 @@
 import type { NextConfig } from "next";
 
-const nextConfig = {
+const nextConfig: NextConfig = {
   reactStrictMode: true,
-  experimental: {
-    turbo: false as any,
+  experimental: {},
+  images: {
+    domains: ['images.unsplash.com'],
   },
-  webpack: (config, { isServer }) => {
-    config.resolve.alias['@vercel/turbopack-next/internal/font/google/font'] = false;
-    return config;
-  },
-  optimizeFonts: false
-} as NextConfig;
+};
 
-module.exports = nextConfig;
+export default nextConfig;
