@@ -28,10 +28,12 @@ const PetCard: React.FC<PetCardProps> = ({ pet, onSwipe }) => {
   const controls = useAnimation();
   const [isAnimating, setIsAnimating] = useState(false);
 
+  // Reset animation when pet changes
   useEffect(() => {
-    // Animate the card in when it mounts
+    controls.set({ scale: 0.95, opacity: 0, x: 0, rotate: 0 });
     controls.start({ scale: 1, opacity: 1 });
-  }, [controls]);
+    setIsAnimating(false);
+  }, [pet.id, controls]);
 
   const handleInfoClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -50,7 +52,6 @@ const PetCard: React.FC<PetCardProps> = ({ pet, onSwipe }) => {
       transition: { duration: 0.5 }
     });
     onSwipe(direction);
-    setIsAnimating(false);
   };
 
   const handleLike = async (e?: React.MouseEvent) => {
@@ -110,14 +111,14 @@ const PetCard: React.FC<PetCardProps> = ({ pet, onSwipe }) => {
             <div className="flex items-end justify-between">
               <div>
                 <h2 className="text-3xl font-bold text-white">{pet.name}</h2>
-                <p className="text-lg text-gray-100">{pet.gender} • {pet.age}</p>
+                <p className="text-lg text-gray-50">{pet.gender} • {pet.age}</p>
               </div>
             </div>
             
-            <p className="text-lg text-gray-100">{pet.breed}</p>
+            <p className="text-lg text-gray-50">{pet.breed}</p>
             
             {/* Location */}
-            <div className="flex items-center gap-1 text-gray-100">
+            <div className="flex items-center gap-1 text-gray-50">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -131,13 +132,13 @@ const PetCard: React.FC<PetCardProps> = ({ pet, onSwipe }) => {
                 <Badge
                   key={index}
                   variant="secondary"
-                  className="bg-gray-700 text-gray-100 hover:bg-gray-600"
+                  className="bg-gray-800 text-gray-50 hover:bg-gray-700"
                 >
                   {trait}
                 </Badge>
               ))}
               {pet.personality.length > 3 && (
-                <Badge variant="secondary" className="bg-gray-700 text-gray-100">
+                <Badge variant="secondary" className="bg-gray-800 text-gray-50">
                   +{pet.personality.length - 3} more
                 </Badge>
               )}
@@ -151,7 +152,7 @@ const PetCard: React.FC<PetCardProps> = ({ pet, onSwipe }) => {
             onClick={handleDislike}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="w-14 h-14 rounded-full bg-gray-800 shadow-lg flex items-center justify-center border-2 border-red-400 text-red-400 hover:bg-red-500 hover:text-white transition-colors"
+            className="w-14 h-14 rounded-full bg-gray-900 shadow-lg flex items-center justify-center border-2 border-red-500 text-red-500 hover:bg-red-600 hover:text-white transition-colors"
           >
             <X className="w-8 h-8" />
           </motion.button>
@@ -159,7 +160,7 @@ const PetCard: React.FC<PetCardProps> = ({ pet, onSwipe }) => {
             onClick={handleInfoClick}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="w-14 h-14 rounded-full bg-gray-800 shadow-lg flex items-center justify-center border-2 border-blue-400 text-blue-400 hover:bg-blue-500 hover:text-white transition-colors"
+            className="w-14 h-14 rounded-full bg-gray-900 shadow-lg flex items-center justify-center border-2 border-blue-500 text-blue-500 hover:bg-blue-600 hover:text-white transition-colors"
           >
             <Info className="w-8 h-8" />
           </motion.button>
@@ -167,7 +168,7 @@ const PetCard: React.FC<PetCardProps> = ({ pet, onSwipe }) => {
             onClick={handleLike}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="w-14 h-14 rounded-full bg-gray-800 shadow-lg flex items-center justify-center border-2 border-green-400 text-green-400 hover:bg-green-500 hover:text-white transition-colors"
+            className="w-14 h-14 rounded-full bg-gray-900 shadow-lg flex items-center justify-center border-2 border-green-500 text-green-500 hover:bg-green-600 hover:text-white transition-colors"
           >
             <Heart className="w-8 h-8" />
           </motion.button>
@@ -175,10 +176,10 @@ const PetCard: React.FC<PetCardProps> = ({ pet, onSwipe }) => {
 
         {/* Size and Energy Level Indicators */}
         <div className="absolute top-4 right-4 flex gap-2">
-          <Badge variant="secondary" className="bg-gray-700/90 text-gray-100">
+          <Badge variant="secondary" className="bg-gray-900/90 text-gray-50">
             {pet.size}
           </Badge>
-          <Badge variant="secondary" className="bg-gray-700/90 text-gray-100">
+          <Badge variant="secondary" className="bg-gray-900/90 text-gray-50">
             {pet.energyLevel} Energy
           </Badge>
         </div>
